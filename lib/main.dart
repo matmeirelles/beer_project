@@ -1,3 +1,4 @@
+import 'package:beers_project/components/stock_update_auth_dialog.dart';
 import 'package:beers_project/screens/beers/beer_form.dart';
 import 'package:beers_project/screens/beers/beer_list.dart';
 import 'package:beers_project/screens/brands/brand_form.dart';
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.blueAccent,
         ),
       ),
-      home: const Dashboard(),
+      home: StockUpdateAuthDialog(onConfirm: ((password) => print(password))),
       // initialRoute: '/beerList',
       routes: {
         '/beerList': (context) => const BeerList(),
