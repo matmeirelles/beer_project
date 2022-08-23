@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           secondary: Colors.blueAccent,
         ),
       ),
-      home: StockUpdateAuthDialog(onConfirm: ((password) => print(password))),
+      home: const Dashboard(),
       // initialRoute: '/beerList',
       routes: {
         '/beerList': (context) => const BeerList(),
