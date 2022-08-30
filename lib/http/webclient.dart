@@ -14,9 +14,17 @@ class WebClient {
   static const Map<int, String> statusCodeResponse = {
     401: 'Senha incorreta',
     400: 'Informações inválidas',
+    409: 'Atualização de estoque já existe',
   };
 
   static void throwHttpError(Response response) {
-    throw Exception(statusCodeResponse[response.statusCode]);
+    throw Exception(_getExceptionMessage(response.statusCode));
+  }
+
+  static String? _getExceptionMessage(int statusCode) {
+    if (statusCodeResponse.containsKey(statusCode)) {
+      return statusCodeResponse[statusCode];
+    }
+    return 'Erro desconhecido';
   }
 }

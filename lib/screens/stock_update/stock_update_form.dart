@@ -3,6 +3,7 @@ import 'package:beers_project/components/text_input_editor.dart';
 import 'package:beers_project/http/webclients/stock_update_webclient.dart';
 import 'package:beers_project/model/stock_update.dart';
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 import '../../components/stock_update_auth_dialog.dart';
 import '../../model/beer.dart';
@@ -11,6 +12,7 @@ class StockUpdateForm extends StatelessWidget {
   final Beer beer;
   final TextEditingController _quantityController = TextEditingController();
   final StockUpdateWebClient _webClient = StockUpdateWebClient();
+  final String stockUpdateId = const Uuid().v4();
 
   final String appBarTitle = 'Atualizar estoque';
 
@@ -18,6 +20,7 @@ class StockUpdateForm extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(stockUpdateId);
     return Scaffold(
       appBar: AppBar(
         title: Text(appBarTitle),
@@ -55,6 +58,7 @@ class StockUpdateForm extends StatelessWidget {
                 onPressed: () {
                   if (_quantityController.text.isNotEmpty) {
                     final StockUpdate stockUpdateCreated = StockUpdate(
+                      id: stockUpdateId,
                       beerName: beer.beerName,
                       beerQuantity: int.parse(_quantityController.text),
                     );
