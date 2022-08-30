@@ -97,11 +97,19 @@ class StockUpdateForm extends StatelessWidget {
                   message: 'Atualização realizada com sucesso');
             }).then((value) => Navigator.pop(context)))
         .catchError((e) {
-      showDialog(
-          context: context,
-          builder: (contextDialog) {
-            return FailureDialog(message: e.message);
-          });
+      if (e.message != null) {
+        showDialog(
+            context: context,
+            builder: (contextDialog) {
+              return FailureDialog(message: e.message);
+            });
+      } else {
+        showDialog(
+            context: context,
+            builder: (contextDialog) {
+              return const FailureDialog(message: 'Erro desconhecido');
+            });
+      }
     });
   }
 }
