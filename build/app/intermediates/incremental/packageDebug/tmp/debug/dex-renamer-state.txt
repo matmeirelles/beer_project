@@ -1,4 +1,4 @@
-#Tue Aug 30 09:25:02 BRT 2022
+#Tue Aug 30 20:08:52 BRT 2022
 base.0=/Users/mat.meirelles/Documents/workspace/beers_project/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
 renamed.0=classes.dex
 path.0=classes.dex
