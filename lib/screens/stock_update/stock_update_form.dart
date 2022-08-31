@@ -93,7 +93,10 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
                 child: _loadingVisibility == true
                     ? const Padding(
                         padding: EdgeInsets.all(8.0),
-                        child: Loading(message: 'Enviando'),
+                        child: Loading(
+                          message: 'Enviando',
+                          circular: false,
+                        ),
                       )
                     : const Text('Salvar'),
               ),
