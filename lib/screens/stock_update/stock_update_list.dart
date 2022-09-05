@@ -24,11 +24,17 @@ class StockUpdateListState extends State<StockUpdateList> {
         title: const Text('Atualização de estoque'),
       ),
       body: FutureBuilder<List<StockUpdate>>(
-        future: Future.delayed(const Duration(milliseconds: 500))
-            .then((value) => _webClient.findAllStockUpdates()),
+        future: _webClient.findAllStockUpdates(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
+              // if (snapshot.hasError) {
+              //   return const CenteredMessage(
+              //     message: 'Erro',
+              //     icon: Icons.warning,
+              //     iconSize: 50.0,
+              //   );
+              // }
               break;
             case ConnectionState.waiting:
               return const Loading();

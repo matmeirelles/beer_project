@@ -10,7 +10,6 @@ class StockUpdateWebClient {
     final Response response = await WebClient.client
         .get(Uri.http(WebClient.baseUrl, WebClient.transactionsBasePath))
         .timeout(const Duration(seconds: 5));
-    // .catchError((error) => throw Exception('Falha ao acessar endereço'));
 
     //No exemplo estou transformando os dados de Transactions da API em uma lista de StockUdpates apenas para teste
     return _jsonToStockUpdateList(response);

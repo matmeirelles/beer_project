@@ -126,12 +126,12 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
             return const SuccessDialog(
                 message: 'Atualização realizada com sucesso');
           }).then((value) => Navigator.pop(context));
-    }).catchError((e) {
-      if (e.message != null) {
+    }).catchError((error) {
+      if (error.message != null) {
         showDialog(
             context: context,
             builder: (contextDialog) {
-              return FailureDialog(message: e.message);
+              return FailureDialog(message: error.message);
             });
       } else {
         showDialog(

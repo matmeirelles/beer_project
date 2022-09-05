@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
@@ -36,6 +38,11 @@ class Dashboard extends StatelessWidget {
                   name: 'Atualização de estoque',
                   icon: Icons.description,
                   onClick: () => _goToPage(context, '/stockUpdateList'),
+                ),
+                _FeatureItem(
+                  name: 'Teste Falha',
+                  icon: Icons.description,
+                  onClick: () => throw TimeoutException('Erro de timeout'),
                 ),
               ],
             ),

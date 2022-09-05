@@ -4,7 +4,7 @@
             "outputFile": "/Users/mat.meirelles/Documents/workspace/beers_project/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-pt/values-pt.xml",
             "map": [
                 {
-                    "source": "/Users/mat.meirelles/.gradle/caches/transforms-3/acbce933e4b464a5224ed377a62db1f5/transformed/core-1.6.0/res/values-pt/values-pt.xml",
+                    "source": "/Users/mat.meirelles/.gradle/caches/transforms-3/7f405fad3fb6a9a14fd6a9f4301665fb/transformed/core-1.6.0/res/values-pt/values-pt.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
