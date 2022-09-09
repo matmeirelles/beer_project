@@ -1,27 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/mat.meirelles/Documents/workspace/beers_project/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-af/values-af.xml",
+            "outputFile": "C:\\Users\\mat_m\\workspace\\beer_project\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-af\\values-af.xml",
             "map": [
                 {
-                    "source": "/Users/mat.meirelles/.gradle/caches/transforms-3/7fff8a9a366f0e49dc79fb2139f55579/transformed/jetified-play-services-basement-18.0.0/res/values-af/values.xml",
-                    "from": {
-                        "startLines": "4",
-                        "startColumns": "0",
-                        "startOffsets": "195",
-                        "endColumns": "138",
-                        "endOffsets": "333"
-                    },
-                    "to": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "142",
-                        "endOffsets": "193"
-                    }
-                },
-                {
-                    "source": "/Users/mat.meirelles/.gradle/caches/transforms-3/7f405fad3fb6a9a14fd6a9f4301665fb/transformed/core-1.6.0/res/values-af/values-af.xml",
+                    "source": "C:\\Users\\mat_m\\.gradle\\caches\\transforms-3\\7f405fad3fb6a9a14fd6a9f4301665fb\\transformed\\core-1.6.0\\res\\values-af\\values-af.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",
@@ -35,6 +18,23 @@
                         "startOffsets": "198",
                         "endColumns": "100",
                         "endOffsets": "294"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\mat_m\\.gradle\\caches\\transforms-3\\7fff8a9a366f0e49dc79fb2139f55579\\transformed\\jetified-play-services-basement-18.0.0\\res\\values-af\\values.xml",
+                    "from": {
+                        "startLines": "4",
+                        "startColumns": "0",
+                        "startOffsets": "195",
+                        "endColumns": "138",
+                        "endOffsets": "333"
+                    },
+                    "to": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "142",
+                        "endOffsets": "193"
                     }
                 }
             ]

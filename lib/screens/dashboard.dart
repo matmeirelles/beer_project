@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 
 class Dashboard extends StatelessWidget {
@@ -42,7 +43,7 @@ class Dashboard extends StatelessWidget {
                 _FeatureItem(
                   name: 'Teste Falha',
                   icon: Icons.description,
-                  onClick: () => throw TimeoutException('Erro de timeout'),
+                  onClick: () => FirebaseCrashlytics.instance.crash(),
                 ),
               ],
             ),

@@ -20,7 +20,7 @@ class StockUpdateWebClient {
     final String transactionJson = jsonEncode(stockUpdate.toJson());
 
     //testando quando há atraso na requisição
-    await Future.delayed(const Duration(seconds: 4));
+    // await Future.delayed(const Duration(seconds: 4));
 
     final Response response = await WebClient.client
         .post(Uri.http(WebClient.baseUrl, WebClient.transactionsBasePath),

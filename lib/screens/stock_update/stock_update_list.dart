@@ -28,13 +28,11 @@ class StockUpdateListState extends State<StockUpdateList> {
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
-              // if (snapshot.hasError) {
-              //   return const CenteredMessage(
-              //     message: 'Erro',
-              //     icon: Icons.warning,
-              //     iconSize: 50.0,
-              //   );
-              // }
+              // return const CenteredMessage(
+              //   message: 'Erro',
+              //   icon: Icons.warning,
+              //   iconSize: 50.0,
+              // );
               break;
             case ConnectionState.waiting:
               return const Loading();
@@ -42,14 +40,15 @@ class StockUpdateListState extends State<StockUpdateList> {
               break;
             case ConnectionState.done:
               final stockUpdates = snapshot.data as List<StockUpdate>;
-
-              if (snapshot.hasError) {
-                return const CenteredMessage(
-                  message: 'Erro',
-                  icon: Icons.warning,
-                  iconSize: 50.0,
-                );
-              }
+              //TODO: Adicionar tratamento de erro quando nao houver retorno da API
+              // if (snapshot.hasError) {
+              //   print('AQUIIIII!!!!!');
+              //   return const CenteredMessage(
+              //     message: 'Erro',
+              //     icon: Icons.warning,
+              //     iconSize: 50.0,
+              //   );
+              // }
 
               if (stockUpdates.isNotEmpty) {
                 return ListView.builder(

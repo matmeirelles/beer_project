@@ -94,13 +94,13 @@
     <integer name="status_bar_notification_info_maxnum">999</integer>
     <string name="com.google.firebase.crashlytics.mapping_file_id" ns1:ignore="UnusedResources,TypographyDashes" translatable="false">00000000000000000000000000000000</string>
     <string name="common_google_play_services_unknown_issue"><ns2:g id="app_name">%1$s</ns2:g> is having trouble with Google Play services. Please try again.</string>
-    <string name="default_web_client_id" translatable="false">918016397418-t7rptik8rall1pokg31jivr4fs5hep08.apps.googleusercontent.com</string>
-    <string name="gcm_defaultSenderId" translatable="false">918016397418</string>
-    <string name="google_api_key" translatable="false">AIzaSyAjvYHmLsfFCiSMRV1KTLv2gBelz4wL7DA</string>
-    <string name="google_app_id" translatable="false">1:918016397418:android:b67991d022ced4070dba13</string>
-    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyAjvYHmLsfFCiSMRV1KTLv2gBelz4wL7DA</string>
-    <string name="google_storage_bucket" translatable="false">beers-project-1477a.appspot.com</string>
-    <string name="project_id" translatable="false">beers-project-1477a</string>
+    <string name="default_web_client_id" translatable="false">493951129020-bmgg95umusnevene3fugudei9qstksq0.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">493951129020</string>
+    <string name="google_api_key" translatable="false">AIzaSyDtl065uY6_qsnIHDDOPkggBjVgrZG85m0</string>
+    <string name="google_app_id" translatable="false">1:493951129020:android:06ca107dde434183fb47b9</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyDtl065uY6_qsnIHDDOPkggBjVgrZG85m0</string>
+    <string name="google_storage_bucket" translatable="false">beer-project-8cbba.appspot.com</string>
+    <string name="project_id" translatable="false">beer-project-8cbba</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="LaunchTheme" parent="@android:style/Theme.Light.NoTitleBar">
         <!-- Show a splash screen on the activity. Automatically removed when

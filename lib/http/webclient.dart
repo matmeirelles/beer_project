@@ -8,8 +8,8 @@ class WebClient {
     interceptors: [LoggingInterceptor()],
   );
 
-  static const String baseUrl = '192.168.15.38:8080';
   static const String transactionsBasePath = '/transactions';
+  static const String baseUrl = '192.168.15.27:8080';
 
   static const Map<int, String> statusCodeResponse = {
     401: 'Senha incorreta',
