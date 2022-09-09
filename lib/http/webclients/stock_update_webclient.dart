@@ -28,7 +28,8 @@ class StockUpdateWebClient {
               'Content-type': 'application/json',
               'password': password,
             },
-            body: transactionJson);
+            body: transactionJson)
+        .timeout(const Duration(seconds: 5));
 
     if (response.statusCode != 200) {
       WebClient.throwHttpError(response);

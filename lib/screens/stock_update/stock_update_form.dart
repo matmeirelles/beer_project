@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:beers_project/components/loading.dart';
 import 'package:beers_project/components/response_dialog.dart';
 import 'package:beers_project/components/text_input_editor.dart';
 import 'package:beers_project/http/webclients/stock_update_webclient.dart';
 import 'package:beers_project/model/stock_update.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 
@@ -127,6 +130,16 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
                 message: 'Atualização realizada com sucesso');
           }).then((value) => Navigator.pop(context));
     }).catchError((error) {
+      FirebaseCrashlytics.instance.recordError(error.message, null);
+
+      showDialog(
+          context: context,
+          builder: (contextDialog) {
+            return const FailureDialog(message: 'Erro de timeout');
+          });
+    }, test: (error) => error is TimeoutException).catchError((error) {
+      FirebaseCrashlytics.instance.recordError(error.message, null);
+
       if (error.message != null) {
         showDialog(
             context: context,

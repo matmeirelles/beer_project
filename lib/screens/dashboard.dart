@@ -40,11 +40,6 @@ class Dashboard extends StatelessWidget {
                   icon: Icons.description,
                   onClick: () => _goToPage(context, '/stockUpdateList'),
                 ),
-                _FeatureItem(
-                  name: 'Teste Falha',
-                  icon: Icons.description,
-                  onClick: () => FirebaseCrashlytics.instance.crash(),
-                ),
               ],
             ),
           ),
