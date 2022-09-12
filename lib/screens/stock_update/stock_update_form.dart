@@ -130,10 +130,7 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
                 message: 'Atualização realizada com sucesso');
           }).then((value) => Navigator.pop(context));
     }).catchError((error) {
-      FirebaseCrashlytics.instance.setCustomKey('exception', error.toString());
-      FirebaseCrashlytics.instance
-          .setCustomKey('http_body', stockUpdateCreated.toString());
-      FirebaseCrashlytics.instance.recordError(error, null);
+      _sendErrorCrashlytics(error, stockUpdateCreated);
 
       showDialog(
           context: context,
@@ -141,10 +138,7 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
             return const FailureDialog(message: 'Erro de timeout');
           });
     }, test: (error) => error is TimeoutException).catchError((error) {
-      FirebaseCrashlytics.instance.setCustomKey('exception', error.toString());
-      FirebaseCrashlytics.instance
-          .setCustomKey('http_body', stockUpdateCreated.toString());
-      FirebaseCrashlytics.instance.recordError(error, null);
+      _sendErrorCrashlytics(error, stockUpdateCreated);
 
       if (error.message != null) {
         showDialog(
@@ -160,5 +154,14 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
             });
       }
     });
+  }
+
+  void _sendErrorCrashlytics(error, StockUpdate stockUpdateCreated) {
+    FirebaseCrashlytics.instance.setCustomKey('exception', error.toString());
+    FirebaseCrashlytics.instance
+        .setCustomKey('http_body', stockUpdateCreated.toString());
+    FirebaseCrashlytics.instance
+        .setCustomKey('stock_update_id', stockUpdateCreated.id);
+    FirebaseCrashlytics.instance.recordError(error, null);
   }
 }
