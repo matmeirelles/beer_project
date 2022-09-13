@@ -7,6 +7,7 @@ import 'package:beers_project/http/webclients/stock_update_webclient.dart';
 import 'package:beers_project/model/stock_update.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:toast/toast.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../components/stock_update_auth_dialog.dart';
@@ -26,6 +27,7 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
   final StockUpdateWebClient _webClient = StockUpdateWebClient();
   final String stockUpdateId = const Uuid().v4();
   final String appBarTitle = 'Atualizar estoque';
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _loadingVisibility = false;
 
   @override
@@ -132,11 +134,24 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
     }).catchError((error) {
       _sendErrorCrashlytics(error, stockUpdateCreated);
 
-      showDialog(
-          context: context,
-          builder: (contextDialog) {
-            return const FailureDialog(message: 'Erro de timeout');
-          });
+      //TODO: ajustar todas as mensagens de erro para ScnackBar
+
+      // ScaffoldMessenger.of(context).showSnackBar(_showFailureMessage(
+      //     message: 'Não foi possível conectar ao servidor'));
+
+      //Utilizando Toast para mensagem de erro
+      ToastContext().init(context);
+      Toast.show(
+        'Erro de timeout',
+        duration: 5,
+        gravity: Toast.bottom,
+      );
+
+      // showDialog(
+      //     context: context,
+      //     builder: (contextDialog) {
+      //       return const FailureDialog(message: 'Erro de timeout');
+      //     });
     }, test: (error) => error is TimeoutException).catchError((error) {
       _sendErrorCrashlytics(error, stockUpdateCreated);
 
@@ -166,4 +181,8 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
       FirebaseCrashlytics.instance.recordError(error, null);
     }
   }
+}
+
+SnackBar _showFailureMessage({String message = 'Erro ao realizar operação'}) {
+  return SnackBar(content: Text(message));
 }

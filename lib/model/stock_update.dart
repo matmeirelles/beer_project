@@ -7,7 +7,7 @@ class StockUpdate {
     required this.id,
     required this.beerName,
     required this.beerQuantity,
-  });
+  }) : assert(beerQuantity > 0);
 
 //Retorna um StockUpdate a partir de um elemento 'json'
   StockUpdate.fromJson(Map<String, dynamic> json)

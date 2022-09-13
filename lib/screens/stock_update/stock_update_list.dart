@@ -41,6 +41,7 @@ class StockUpdateListState extends State<StockUpdateList> {
             case ConnectionState.done:
               final stockUpdates = snapshot.data as List<StockUpdate>;
               //TODO: Adicionar tratamento de erro quando nao houver retorno da API
+              
               // if (snapshot.hasError) {
               //   print('AQUIIIII!!!!!');
               //   return const CenteredMessage(

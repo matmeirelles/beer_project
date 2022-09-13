@@ -41,6 +41,7 @@ dependencies:
   firebase_core:
   flutterfire_cli:
   firebase_crashlytics:
+  toast: ^0.3.0
 dev_dependencies:
   flutter_test:
     sdk: flutter
