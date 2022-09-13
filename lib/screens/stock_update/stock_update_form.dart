@@ -157,11 +157,13 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
   }
 
   void _sendErrorCrashlytics(error, StockUpdate stockUpdateCreated) {
-    FirebaseCrashlytics.instance.setCustomKey('exception', error.toString());
-    FirebaseCrashlytics.instance
-        .setCustomKey('http_body', stockUpdateCreated.toString());
-    FirebaseCrashlytics.instance
-        .setCustomKey('stock_update_id', stockUpdateCreated.id);
-    FirebaseCrashlytics.instance.recordError(error, null);
+    if (FirebaseCrashlytics.instance.isCrashlyticsCollectionEnabled) {
+      FirebaseCrashlytics.instance.setCustomKey('exception', error.toString());
+      FirebaseCrashlytics.instance
+          .setCustomKey('http_body', stockUpdateCreated.toString());
+      FirebaseCrashlytics.instance
+          .setCustomKey('stock_update_id', stockUpdateCreated.id);
+      FirebaseCrashlytics.instance.recordError(error, null);
+    }
   }
 }
