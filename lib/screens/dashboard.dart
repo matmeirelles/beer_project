@@ -25,17 +25,17 @@ class Dashboard extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             child: Row(
               children: <Widget>[
-                _FeatureItem(
+                FeatureItem(
                   name: 'Cervejas',
                   icon: Icons.sports_bar,
                   onClick: () => _goToPage(context, '/beerList'),
                 ),
-                _FeatureItem(
+                FeatureItem(
                   name: 'Marcas',
                   icon: Icons.home_filled,
                   onClick: () => _goToPage(context, '/brandList'),
                 ),
-                _FeatureItem(
+                FeatureItem(
                   name: 'Atualização de estoque',
                   icon: Icons.description,
                   onClick: () => _goToPage(context, '/stockUpdateList'),
@@ -53,12 +53,12 @@ class Dashboard extends StatelessWidget {
   }
 }
 
-class _FeatureItem extends StatelessWidget {
+class FeatureItem extends StatelessWidget {
   final String name;
   final IconData? icon;
   final Function? onClick;
 
-  const _FeatureItem({
+  const FeatureItem({
     Key? key,
     required this.name,
     required this.icon,

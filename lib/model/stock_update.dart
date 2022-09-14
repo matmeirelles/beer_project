@@ -27,6 +27,6 @@ class StockUpdate {
 
   @override
   String toString() {
-    return '{beer_name: $beerName, beer_quantity: $beerQuantity}';
+    return '{id: $id, beer_name: $beerName, beer_quantity: $beerQuantity}';
   }
 }
