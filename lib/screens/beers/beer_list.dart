@@ -5,19 +5,20 @@ import 'package:flutter/material.dart';
 
 import '../../components/beer_card.dart';
 import '../../model/beer.dart';
+import 'beer_form.dart';
 
 const String _appBarTitle = 'Lista de cervejas';
 
 class BeerList extends StatefulWidget {
-  const BeerList({Key? key}) : super(key: key);
+  final BeerDao beerDao;
+
+  const BeerList({Key? key, required this.beerDao}) : super(key: key);
 
   @override
   State<BeerList> createState() => _BeerListState();
 }
 
 class _BeerListState extends State<BeerList> {
-  final BeerDao _beerDao = BeerDao();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,8 +38,7 @@ class _BeerListState extends State<BeerList> {
       ),
       body: FutureBuilder<List<Beer>>(
         initialData: List.empty(),
-        future: Future.delayed(const Duration(milliseconds: 500))
-            .then((value) => _beerDao.findAllBeers()),
+        future: widget.beerDao.findAllBeers(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -86,7 +86,13 @@ class _BeerListState extends State<BeerList> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          await Navigator.pushNamed(context, '/beerForm');
+          // await Navigator.pushNamed(context, '/beerForm');
+
+          await Navigator.of(context).push(MaterialPageRoute(
+              builder: ((context) => BeerForm(
+                    beerDao: widget.beerDao,
+                  ))));
+
           setState(() {});
         },
         child: const Icon(Icons.add),

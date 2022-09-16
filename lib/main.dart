@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:beers_project/database/dao/beer_dao.dart';
 import 'package:beers_project/screens/beers/beer_form.dart';
 import 'package:beers_project/screens/beers/beer_list.dart';
 import 'package:beers_project/screens/brands/brand_form.dart';
@@ -25,14 +26,19 @@ void main() async {
   }
 
   runZonedGuarded<Future<void>>(() async {
-    runApp(const MyApp());
+    runApp(MyApp(beerDao: BeerDao()));
   },
       (error, stackTrace) =>
           FirebaseCrashlytics.instance.recordError(error, stackTrace));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  final BeerDao beerDao;
+
+  const MyApp({
+    Key? key,
+    required this.beerDao,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -43,12 +49,18 @@ class MyApp extends StatelessWidget {
           secondary: Colors.blueAccent,
         ),
       ),
-      home: const Dashboard(),
+      home: Dashboard(beerDao: beerDao),
       // initialRoute: '/beerList',
       routes: {
-        '/beerList': (context) => const BeerList(),
-        '/beerForm': (context) => BeerForm(),
-        '/dashboard': (context) => const Dashboard(),
+        '/beerList': (context) => BeerList(
+              beerDao: beerDao,
+            ),
+        '/beerForm': (context) => BeerForm(
+              beerDao: beerDao,
+            ),
+        '/dashboard': (context) => Dashboard(
+              beerDao: beerDao,
+            ),
         '/brandList': (context) => const BrandList(),
         '/brandForm': (context) => BrandForm(),
         '/stockUpdateList': (context) => const StockUpdateList(),

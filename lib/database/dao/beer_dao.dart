@@ -29,7 +29,7 @@ class BeerDao {
     return null;
   }
 
-  Future<List<Beer>> findAllBeers() async {
+  Future<List<Beer>>? findAllBeers() async {
     final Database db = await getDatabase();
 
     final List<Map<String, dynamic>> beersMapList = await db.query(
@@ -44,7 +44,7 @@ class BeerDao {
     return beersList;
   }
 
-  Future<int> saveBeer(Beer beer) async {
+  Future<int>? saveBeer(Beer beer) async {
     final Database db = await getDatabase();
 
     Map<String, dynamic> beerMap = _extractBeerToMap(beer);

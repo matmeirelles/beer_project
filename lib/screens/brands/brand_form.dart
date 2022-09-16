@@ -45,7 +45,7 @@ class BrandForm extends StatelessWidget {
                     brandCity: _brandCityController.text,
                   );
                   _brandDao.saveBrand(newBrand).then(
-                        (id) => Navigator.pop(context, newBrand),
+                        (int id) => Navigator.pop(context, newBrand),
                       );
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

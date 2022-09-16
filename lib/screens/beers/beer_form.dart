@@ -11,12 +11,12 @@ const String _formError = 'Insira as informações da cerveja';
 const String _addButton = 'Adicionar';
 
 class BeerForm extends StatelessWidget {
-  BeerForm({Key? key}) : super(key: key);
+  final BeerDao beerDao;
+
+  BeerForm({Key? key, required this.beerDao}) : super(key: key);
 
   final TextEditingController _beerNameController = TextEditingController();
   final TextEditingController _beerBrandController = TextEditingController();
-
-  final BeerDao _beerDao = BeerDao();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class BeerForm extends StatelessWidget {
                     beerName: _beerNameController.text,
                     beerBrand: _beerBrandController.text,
                   );
-                  _beerDao.saveBeer(newBeer);
+                  beerDao.saveBeer(newBeer);
                   Navigator.pop(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

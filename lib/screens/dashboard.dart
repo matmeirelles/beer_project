@@ -1,10 +1,12 @@
-import 'dart:async';
-
-import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:beers_project/screens/beers/beer_list.dart';
 import 'package:flutter/material.dart';
 
+import '../database/dao/beer_dao.dart';
+
 class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+  final BeerDao beerDao;
+
+  const Dashboard({Key? key, required this.beerDao}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -13,42 +15,56 @@ class Dashboard extends StatelessWidget {
         title: const Text('Painel'),
         backgroundColor: Theme.of(context).primaryColor,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Image.asset('images/beer_image.jpeg'),
-          ),
-          SingleChildScrollView(
-            scrollDirection: Axis.horizontal,
-            child: Row(
+      body: LayoutBuilder(
+        builder: (context, constrains) => SingleChildScrollView(
+          child: ConstrainedBox(
+            constraints: BoxConstraints(
+              minHeight: constrains.maxHeight,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                FeatureItem(
-                  name: 'Cervejas',
-                  icon: Icons.sports_bar,
-                  onClick: () => _goToPage(context, '/beerList'),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Image.asset('images/beer_image.jpeg'),
                 ),
-                FeatureItem(
-                  name: 'Marcas',
-                  icon: Icons.home_filled,
-                  onClick: () => _goToPage(context, '/brandList'),
-                ),
-                FeatureItem(
-                  name: 'Atualização de estoque',
-                  icon: Icons.description,
-                  onClick: () => _goToPage(context, '/stockUpdateList'),
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: <Widget>[
+                      FeatureItem(
+                        name: 'Cervejas',
+                        icon: Icons.sports_bar,
+                        onClick: () => Navigator.of(context).push(
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    BeerList(beerDao: beerDao))),
+                      ),
+                      FeatureItem(
+                        name: 'Marcas',
+                        icon: Icons.home_filled,
+                        onClick: () => _goToPage(
+                            context: context, routeName: '/brandList'),
+                      ),
+                      FeatureItem(
+                        name: 'Atualização de estoque',
+                        icon: Icons.description,
+                        onClick: () => _goToPage(
+                            context: context, routeName: '/stockUpdateList'),
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
           ),
-        ],
+        ),
       ),
     );
   }
 
-  void _goToPage(BuildContext context, String routeName) {
+  void _goToPage({required BuildContext context, required String routeName}) {
     Navigator.pushNamed(context, routeName);
   }
 }

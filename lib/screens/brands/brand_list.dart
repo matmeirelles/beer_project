@@ -58,7 +58,7 @@ class _BrandListState extends State<BrandList> {
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           Navigator.pushNamed(context, '/brandForm')
-              .then((value) => setState(() {}));
+              .then((newBrand) => setState(() {}));
 
           // Navigator.push(
           //     context, MaterialPageRoute(builder: ((context) => BrandForm())));
