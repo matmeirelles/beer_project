@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+const stockUpdateAuthDialogTextFieldPasswordKey =
+    Key('stockUpdateAuthDialogTextFieldPassword');
+
 class StockUpdateAuthDialog extends StatefulWidget {
   final Function(String password) onConfirm;
 
@@ -16,6 +19,7 @@ class _StockUpdateAuthDialogState extends State<StockUpdateAuthDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      key: stockUpdateAuthDialogTextFieldPasswordKey,
       title: const Text('Autenticação'),
       content: TextField(
         keyboardType: TextInputType.number,

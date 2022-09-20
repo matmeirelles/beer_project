@@ -21,9 +21,9 @@ void main() {
         id: Random().nextInt(10000).toString(),
         beerName: 'Skol',
         beerQuantity: Random().nextInt(200));
-    final StockUpdate createdStockUpdate =
+    final StockUpdate? createdStockUpdate =
         await StockUpdateWebClient().saveStockUpdate(newStockUpdate, '1000');
 
-    expect(newStockUpdate.toJson(), createdStockUpdate.toJson());
+    expect(newStockUpdate.toJson(), createdStockUpdate!.toJson());
   });
 }

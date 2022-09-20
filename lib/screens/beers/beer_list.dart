@@ -1,18 +1,16 @@
 import 'package:beers_project/components/todo_snackbar.dart';
-import 'package:beers_project/database/dao/beer_dao.dart';
 import 'package:beers_project/screens/stock_update/stock_update_form.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/beer_card.dart';
 import '../../model/beer.dart';
+import '../../widgets/app_dependencies.dart';
 import 'beer_form.dart';
 
 const String _appBarTitle = 'Lista de cervejas';
 
 class BeerList extends StatefulWidget {
-  final BeerDao beerDao;
-
-  const BeerList({Key? key, required this.beerDao}) : super(key: key);
+  const BeerList({Key? key}) : super(key: key);
 
   @override
   State<BeerList> createState() => _BeerListState();
@@ -21,6 +19,7 @@ class BeerList extends StatefulWidget {
 class _BeerListState extends State<BeerList> {
   @override
   Widget build(BuildContext context) {
+    final dependencies = AppDependencies.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(_appBarTitle),
@@ -38,7 +37,7 @@ class _BeerListState extends State<BeerList> {
       ),
       body: FutureBuilder<List<Beer>>(
         initialData: List.empty(),
-        future: widget.beerDao.findAllBeers(),
+        future: dependencies.beerDao.findAllBeers(),
         builder: (context, snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -88,10 +87,8 @@ class _BeerListState extends State<BeerList> {
         onPressed: () async {
           // await Navigator.pushNamed(context, '/beerForm');
 
-          await Navigator.of(context).push(MaterialPageRoute(
-              builder: ((context) => BeerForm(
-                    beerDao: widget.beerDao,
-                  ))));
+          await Navigator.of(context)
+              .push(MaterialPageRoute(builder: ((context) => BeerForm())));
 
           setState(() {});
         },

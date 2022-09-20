@@ -15,7 +15,7 @@ class StockUpdateWebClient {
     return _jsonToStockUpdateList(response);
   }
 
-  Future<StockUpdate> saveStockUpdate(
+  Future<StockUpdate>? saveStockUpdate(
       StockUpdate stockUpdate, String password) async {
     final String transactionJson = jsonEncode(stockUpdate.toJson());
 

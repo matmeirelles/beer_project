@@ -5,9 +5,9 @@ import 'package:beers_project/components/response_dialog.dart';
 import 'package:beers_project/components/text_input_editor.dart';
 import 'package:beers_project/http/webclients/stock_update_webclient.dart';
 import 'package:beers_project/model/stock_update.dart';
+import 'package:beers_project/widgets/app_dependencies.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
-import 'package:toast/toast.dart';
 import 'package:uuid/uuid.dart';
 
 import '../../components/stock_update_auth_dialog.dart';
@@ -24,15 +24,13 @@ class StockUpdateForm extends StatefulWidget {
 
 class _StockUpdateFormState extends State<StockUpdateForm> {
   final TextEditingController _quantityController = TextEditingController();
-  final StockUpdateWebClient _webClient = StockUpdateWebClient();
   final String stockUpdateId = const Uuid().v4();
   final String appBarTitle = 'Atualizar estoque';
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool _loadingVisibility = false;
 
   @override
   Widget build(BuildContext context) {
-    print(stockUpdateId);
+    final dependencies = AppDependencies.of(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(appBarTitle),
@@ -82,7 +80,11 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
                               return StockUpdateAuthDialog(
                                   onConfirm: ((password) {
                                 _saveStockUpdate(
-                                    stockUpdateCreated, password, context);
+                                  stockUpdateCreated,
+                                  password,
+                                  context,
+                                  dependencies.stockUpdateWebClient,
+                                );
                               }));
                             }),
                           );
@@ -116,11 +118,12 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
     StockUpdate stockUpdateCreated,
     String password,
     BuildContext context,
+    StockUpdateWebClient webClient,
   ) {
     setState(() {
       _loadingVisibility = true;
     });
-    _webClient.saveStockUpdate(stockUpdateCreated, password).whenComplete(() {
+    webClient.saveStockUpdate(stockUpdateCreated, password)!.whenComplete(() {
       setState(() {
         _loadingVisibility = false;
       });
@@ -136,16 +139,16 @@ class _StockUpdateFormState extends State<StockUpdateForm> {
 
       //TODO: ajustar todas as mensagens de erro para ScnackBar
 
-      // ScaffoldMessenger.of(context).showSnackBar(_showFailureMessage(
-      //     message: 'Não foi possível conectar ao servidor'));
+      ScaffoldMessenger.of(context).showSnackBar(_showFailureMessage(
+          message: 'Não foi possível conectar ao servidor'));
 
       //Utilizando Toast para mensagem de erro
-      ToastContext().init(context);
-      Toast.show(
-        'Erro de timeout',
-        duration: 5,
-        gravity: Toast.bottom,
-      );
+      // ToastContext().init(context);
+      // Toast.show(
+      //   'Erro de timeout',
+      //   duration: 5,
+      //   gravity: Toast.bottom,
+      // );
 
       // showDialog(
       //     context: context,

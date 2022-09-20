@@ -13,7 +13,11 @@ import 'actions.dart';
 void main() {
   testWidgets('Should save a beer', (tester) async {
     final mockBeerDao = MockBeerDao();
-    await tester.pumpWidget(MyApp(beerDao: mockBeerDao));
+    final mockStockUpdateWebClient = MockStockUpdateWebClient();
+    await tester.pumpWidget(MyApp(
+      beerDao: mockBeerDao,
+      stockUpdateWebClient: mockStockUpdateWebClient,
+    ));
 
     //Verifica se o Dashboard existe
     final dashboardWidget = find.byType(Dashboard);
@@ -41,14 +45,14 @@ void main() {
 
     //Verifica se existe campo com nome da cerveja e adiciona um valor a ele
     final beerNameTextField = find.byWidgetPredicate((widget) {
-      return textFieldMatcher(widget, "Nome da cerveja");
+      return textFieldByLabelMatcher(widget, "Nome da cerveja");
     });
     expect(beerNameTextField, findsOneWidget);
     await tester.enterText(beerNameTextField, 'Heineken');
 
     //Verifica se existe campo com marca da cerveja e adiciona um valor a ele
     final brandNameTextField = find.byWidgetPredicate((widget) {
-      return textFieldMatcher(widget, "Marca da cerveja");
+      return textFieldByLabelMatcher(widget, "Marca da cerveja");
     });
     expect(brandNameTextField, findsOneWidget);
     await tester.enterText(brandNameTextField, 'Ambev');

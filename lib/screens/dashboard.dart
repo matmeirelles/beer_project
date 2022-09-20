@@ -1,12 +1,8 @@
 import 'package:beers_project/screens/beers/beer_list.dart';
 import 'package:flutter/material.dart';
 
-import '../database/dao/beer_dao.dart';
-
 class Dashboard extends StatelessWidget {
-  final BeerDao beerDao;
-
-  const Dashboard({Key? key, required this.beerDao}) : super(key: key);
+  const Dashboard({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +34,7 @@ class Dashboard extends StatelessWidget {
                         icon: Icons.sports_bar,
                         onClick: () => Navigator.of(context).push(
                             MaterialPageRoute(
-                                builder: (context) =>
-                                    BeerList(beerDao: beerDao))),
+                                builder: (context) => const BeerList())),
                       ),
                       FeatureItem(
                         name: 'Marcas',

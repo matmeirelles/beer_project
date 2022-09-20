@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 class StockUpdate {
   final String id;
   final String beerName;
@@ -29,4 +30,14 @@ class StockUpdate {
   String toString() {
     return '{id: $id, beer_name: $beerName, beer_quantity: $beerQuantity}';
   }
+
+  @override
+  bool operator ==(covariant StockUpdate other) {
+    if (identical(this, other)) return true;
+
+    return other.beerName == beerName && other.beerQuantity == beerQuantity;
+  }
+
+  @override
+  int get hashCode => beerName.hashCode ^ beerQuantity.hashCode;
 }

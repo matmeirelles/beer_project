@@ -1,8 +1,8 @@
-import 'package:beers_project/database/dao/beer_dao.dart';
 import 'package:flutter/material.dart';
 
 import '../../components/text_input_editor.dart';
 import '../../model/beer.dart';
+import '../../widgets/app_dependencies.dart';
 
 const String _appBarTitle = 'Nova cerveja';
 const String _beerName = 'Nome da cerveja';
@@ -11,15 +11,14 @@ const String _formError = 'Insira as informações da cerveja';
 const String _addButton = 'Adicionar';
 
 class BeerForm extends StatelessWidget {
-  final BeerDao beerDao;
-
-  BeerForm({Key? key, required this.beerDao}) : super(key: key);
+  BeerForm({Key? key}) : super(key: key);
 
   final TextEditingController _beerNameController = TextEditingController();
   final TextEditingController _beerBrandController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
+    final dependencies = AppDependencies.of(context);
     return Scaffold(
       appBar: AppBar(
         title: const Text(_appBarTitle),
@@ -45,7 +44,7 @@ class BeerForm extends StatelessWidget {
                     beerName: _beerNameController.text,
                     beerBrand: _beerBrandController.text,
                   );
-                  beerDao.saveBeer(newBeer);
+                  dependencies.beerDao.saveBeer(newBeer);
                   Navigator.pop(context);
                 } else {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(

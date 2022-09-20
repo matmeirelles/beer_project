@@ -12,7 +12,7 @@ bool featureItemMatcher({
   return false;
 }
 
-bool textFieldMatcher(Widget widget, String label) {
+bool textFieldByLabelMatcher(Widget widget, String label) {
   if (widget is TextField) {
     return widget.decoration!.labelText == label;
   }
