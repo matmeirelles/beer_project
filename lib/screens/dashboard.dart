@@ -48,6 +48,12 @@ class Dashboard extends StatelessWidget {
                         onClick: () => _goToPage(
                             context: context, routeName: '/stockUpdateList'),
                       ),
+                      FeatureItem(
+                        name: 'Transferências',
+                        icon: Icons.description,
+                        onClick: () =>
+                            _goToPage(context: context, routeName: '/transfer'),
+                      ),
                     ],
                   ),
                 ),

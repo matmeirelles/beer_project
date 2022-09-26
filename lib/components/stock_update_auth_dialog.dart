@@ -19,9 +19,9 @@ class _StockUpdateAuthDialogState extends State<StockUpdateAuthDialog> {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      key: stockUpdateAuthDialogTextFieldPasswordKey,
       title: const Text('Autenticação'),
       content: TextField(
+        key: stockUpdateAuthDialogTextFieldPasswordKey,
         keyboardType: TextInputType.number,
         controller: _passwordController,
         maxLength: 4,

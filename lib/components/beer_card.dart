@@ -2,7 +2,7 @@ import 'package:beers_project/components/todo_snackbar.dart';
 import 'package:flutter/material.dart';
 import '../model/beer.dart';
 
-///Abstrair classe Card para ser utilizada por Beer e Brand
+//TODO: Abstrair o card para AppCard
 
 class BeerCard extends StatelessWidget {
   final Beer beer;

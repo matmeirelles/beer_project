@@ -16,10 +16,15 @@ import '../matchers/matchers.dart';
 import 'actions.dart';
 
 void main() {
+  late MockBeerDao mockBeerDao;
+  late MockStockUpdateWebClient mockStockUpdateWebClient;
+
+  setUp(() async {
+    mockBeerDao = MockBeerDao();
+    mockStockUpdateWebClient = MockStockUpdateWebClient();
+  });
   testWidgets('Should save a stock update', (tester) async {
     //Sobe aplicação
-    final mockBeerDao = MockBeerDao();
-    final mockStockUpdateWebClient = MockStockUpdateWebClient();
     await tester.pumpWidget(MyApp(
       beerDao: mockBeerDao,
       stockUpdateWebClient: mockStockUpdateWebClient,

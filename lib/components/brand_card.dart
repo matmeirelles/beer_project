@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 
 import '../model/brand.dart';
 
+//TODO: Abstrair o card para AppCard
+
 class BrandCard extends StatelessWidget {
   final Brand brand;
 
