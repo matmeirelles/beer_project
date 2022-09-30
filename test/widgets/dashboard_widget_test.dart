@@ -1,9 +1,7 @@
 import 'package:beers_project/components/utils/mocks.dart';
 import 'package:beers_project/main.dart';
-import 'package:beers_project/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/mockito.dart';
 
 import '../matchers/matchers.dart';
 

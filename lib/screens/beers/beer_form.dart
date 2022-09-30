@@ -37,7 +37,7 @@ class BeerForm extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8),
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (_beerNameController.text.isNotEmpty &&
                     _beerBrandController.text.isNotEmpty) {
                   final Beer newBeer = Beer(

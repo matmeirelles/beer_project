@@ -20,7 +20,7 @@ void main() {
     ));
 
     //Verifica se o Dashboard existe
-    final dashboardWidget = find.byType(Dashboard);
+    final dashboardWidget = find.byType(DashboardView);
     expect(dashboardWidget, findsOneWidget);
 
     // Verifica se a feature de cervejas existe

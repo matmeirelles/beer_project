@@ -8,7 +8,9 @@ import 'package:beers_project/screens/beers/beer_form.dart';
 import 'package:beers_project/screens/beers/beer_list.dart';
 import 'package:beers_project/screens/brands/brand_form.dart';
 import 'package:beers_project/screens/brands/brand_list.dart';
+import 'package:beers_project/screens/counter/counter.dart';
 import 'package:beers_project/screens/dashboard.dart';
+import 'package:beers_project/screens/namer/namer.dart';
 import 'package:beers_project/screens/stock_update/stock_update_list.dart';
 import 'package:beers_project/screens/transfers/transfers_dashboard.dart';
 import 'package:beers_project/widgets/app_dependencies.dart';
@@ -16,15 +18,17 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kDebugMode;
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
+import 'bloc/containers/dashboard_container.dart';
 import 'components/app_theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
-  // Desliga o envio de erros ao Crashlytics caso código esteja no modo debug
+// Desliga o envio de erros ao Crashlytics caso código esteja no modo debug
   if (kDebugMode) {
     await FirebaseCrashlytics.instance.setCrashlyticsCollectionEnabled(false);
   } else {
@@ -33,18 +37,23 @@ void main() async {
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
   }
 
-  runZonedGuarded<Future<void>>(() async {
-    runApp(MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => Balance(totalValue: 0.0)),
-        ChangeNotifierProvider(create: (context) => Transfers()),
-      ],
-      child: MyApp(
-          beerDao: BeerDao(), stockUpdateWebClient: StockUpdateWebClient()),
-    ));
-  },
-      (error, stackTrace) =>
-          FirebaseCrashlytics.instance.recordError(error, stackTrace));
+  runApp(MyApp(
+    beerDao: BeerDao(),
+    stockUpdateWebClient: StockUpdateWebClient(),
+  ));
+
+  // runZonedGuarded<Future<void>>(() async {
+  //   runApp(MultiProvider(
+  //     providers: [
+  //       ChangeNotifierProvider(create: (context) => Balance(totalValue: 0.0)),
+  //       ChangeNotifierProvider(create: (context) => Transfers()),
+  //     ],
+  //     child: MyApp(
+  //         beerDao: BeerDao(), stockUpdateWebClient: StockUpdateWebClient()),
+  //   ));
+  // },
+  //     (error, stackTrace) =>
+  //         FirebaseCrashlytics.instance.recordError(error, stackTrace));
 }
 
 class MyApp extends StatelessWidget {
@@ -64,12 +73,12 @@ class MyApp extends StatelessWidget {
       beerDao: beerDao,
       child: MaterialApp(
         theme: appTheme,
-        home: const Dashboard(),
+        home: const DashboardContainer(),
         // initialRoute: '/beerList',
         routes: {
           '/beerList': (context) => const BeerList(),
           '/beerForm': (context) => BeerForm(),
-          '/dashboard': (context) => const Dashboard(),
+          '/dashboard': (context) => const DashboardContainer(),
           '/brandList': (context) => const BrandList(),
           '/brandForm': (context) => BrandForm(),
           '/stockUpdateList': (context) => const StockUpdateList(),
@@ -80,3 +89,7 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+// void main() {
+//   runApp(const MaterialApp(home: NameContainer()));
+// }

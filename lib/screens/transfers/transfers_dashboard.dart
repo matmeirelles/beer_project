@@ -2,7 +2,6 @@ import 'package:beers_project/components/balance_card.dart';
 import 'package:beers_project/screens/transfers/deposit_form.dart';
 import 'package:beers_project/screens/transfers/last_transfers.dart';
 import 'package:beers_project/screens/transfers/transfer_form.dart';
-import 'package:beers_project/screens/transfers/transfers_list.dart';
 import 'package:flutter/material.dart';
 
 class TransfersDashboard extends StatelessWidget {
@@ -36,7 +35,7 @@ class TransfersDashboard extends StatelessWidget {
                   child: const Text('Fazer transferência')),
             ],
           ),
-          LastTransfers(),
+          const LastTransfers(),
         ],
       ),
     );

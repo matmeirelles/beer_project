@@ -31,7 +31,7 @@ void main() {
     ));
 
     //Verifica se o Dashboard existe
-    final dashboardWidget = find.byType(Dashboard);
+    final dashboardWidget = find.byType(DashboardView);
     expect(dashboardWidget, findsOneWidget);
 
     when(mockBeerDao.findAllBeers()).thenAnswer(((invocation) async {

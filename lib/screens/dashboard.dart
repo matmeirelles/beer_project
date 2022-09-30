@@ -1,14 +1,22 @@
-import 'package:beers_project/screens/beers/beer_list.dart';
+import 'package:beers_project/bloc/containers/name_container.dart';
+import 'package:beers_project/components/bloc_container.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class Dashboard extends StatelessWidget {
-  const Dashboard({Key? key}) : super(key: key);
+import '../bloc/containers/beers_list_container.dart';
+import '../bloc/cubits/name_cubit.dart';
+
+class DashboardView extends StatelessWidget {
+  const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Painel'),
+        title: BlocBuilder<NameCubit, String>(
+            builder: (context, state) => Text(
+                  'Boas vindas $state',
+                )),
         backgroundColor: Theme.of(context).primaryColor,
       ),
       body: LayoutBuilder(
@@ -30,11 +38,13 @@ class Dashboard extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       FeatureItem(
+                          name: 'Mudar nome',
+                          icon: Icons.person_outlined,
+                          onClick: () => _changeName(context)),
+                      FeatureItem(
                         name: 'Cervejas',
                         icon: Icons.sports_bar,
-                        onClick: () => Navigator.of(context).push(
-                            MaterialPageRoute(
-                                builder: (context) => const BeerList())),
+                        onClick: () => _pushToBeersList(context),
                       ),
                       FeatureItem(
                         name: 'Marcas',
@@ -65,8 +75,21 @@ class Dashboard extends StatelessWidget {
     );
   }
 
+  void _pushToBeersList(BuildContext blocContext) {
+    push(blocContext, const BeersListContainer());
+  }
+
   void _goToPage({required BuildContext context, required String routeName}) {
     Navigator.pushNamed(context, routeName);
+  }
+
+  void _changeName(BuildContext blocContext) {
+    Navigator.of(blocContext).push(MaterialPageRoute(
+      builder: (_) => BlocProvider.value(
+        value: BlocProvider.of<NameCubit>(blocContext),
+        child: const NameContainer(),
+      ),
+    ));
   }
 }
 
