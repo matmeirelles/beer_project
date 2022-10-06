@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:beers_project/components/bloc_container.dart';
 import 'package:beers_project/database/dao/beer_dao.dart';
 import 'package:beers_project/http/webclients/stock_update_webclient.dart';
 import 'package:beers_project/model/balance.dart';
@@ -11,7 +12,7 @@ import 'package:beers_project/screens/brands/brand_list.dart';
 import 'package:beers_project/screens/counter/counter.dart';
 import 'package:beers_project/screens/dashboard.dart';
 import 'package:beers_project/screens/namer/namer.dart';
-import 'package:beers_project/screens/stock_update/stock_update_list.dart';
+import 'package:beers_project/screens/stock_update/stock_update_list_view.dart';
 import 'package:beers_project/screens/transfers/transfers_dashboard.dart';
 import 'package:beers_project/widgets/app_dependencies.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -22,6 +23,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 
 import 'bloc/containers/dashboard_container.dart';
+import 'bloc/containers/localization_container.dart';
 import 'components/app_theme.dart';
 
 void main() async {
@@ -73,15 +75,17 @@ class MyApp extends StatelessWidget {
       beerDao: beerDao,
       child: MaterialApp(
         theme: appTheme,
-        home: const DashboardContainer(),
+        home: const LocalizationContainer(
+          child: DashboardContainer(),
+        ),
         // initialRoute: '/beerList',
         routes: {
-          '/beerList': (context) => const BeerList(),
+          '/beerList': (context) => const BeerListView(),
           '/beerForm': (context) => BeerForm(),
           '/dashboard': (context) => const DashboardContainer(),
           '/brandList': (context) => const BrandList(),
           '/brandForm': (context) => BrandForm(),
-          '/stockUpdateList': (context) => const StockUpdateList(),
+          '/stockUpdateList': (context) => const StockUpdateListView(),
           '/transfer': (context) => const TransfersDashboard(),
           // '/stockUpdateForm': (context) => StockUpdateForm()),
         },
@@ -89,7 +93,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// void main() {
-//   runApp(const MaterialApp(home: NameContainer()));
-// }

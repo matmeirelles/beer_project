@@ -29,7 +29,7 @@ void main() {
     await tester.pumpAndSettle();
 
     //Verifica se achou a lista de cervejas
-    final beerList = find.byType(BeerList);
+    final beerList = find.byType(BeerListView);
     expect(beerList, findsOneWidget);
 
     //Verifica se a chamada de busca do Dao funciona
@@ -68,7 +68,7 @@ void main() {
         .saveBeer(const Beer(beerName: 'Heineken', beerBrand: 'Ambev')));
 
     //Verifica se apareceu novamente a BeerList
-    final beerListReturned = find.byType(BeerList);
+    final beerListReturned = find.byType(BeerListView);
     expect(beerListReturned, findsOneWidget);
 
     //Verifica novamente se a chamada de busca do Dao funciona

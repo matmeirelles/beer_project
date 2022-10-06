@@ -7,7 +7,7 @@ import 'package:beers_project/model/beer.dart';
 import 'package:beers_project/model/stock_update.dart';
 import 'package:beers_project/screens/beers/beer_list.dart';
 import 'package:beers_project/screens/dashboard.dart';
-import 'package:beers_project/screens/stock_update/stock_update_form.dart';
+import 'package:beers_project/screens/stock_update/stock_update_form_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -44,7 +44,7 @@ void main() {
     await tester.pumpAndSettle();
 
     //Verifica se achou a lista de cervejas
-    final beerList = find.byType(BeerList);
+    final beerList = find.byType(BeerListView);
     expect(beerList, findsOneWidget);
 
     //Verifica se a chamada de busca do Dao funciona
@@ -64,7 +64,7 @@ void main() {
     await tester.pumpAndSettle();
 
     // Verifica se achou o formulário de Stock Update
-    final stockUpdateForm = find.byType(StockUpdateForm);
+    final stockUpdateForm = find.byType(StockUpdateFormView);
     expect(stockUpdateForm, findsOneWidget);
 
     //Verifica se achou os componentes do formulário
@@ -126,7 +126,7 @@ void main() {
     await tester.pumpAndSettle();
 
     //Verifica se retorna para lista de cervejas
-    final beerListBack = find.byType(BeerList);
+    final beerListBack = find.byType(BeerListView);
     expect(beerListBack, findsOneWidget);
   });
 }

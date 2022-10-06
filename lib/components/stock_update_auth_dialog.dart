@@ -3,17 +3,11 @@ import 'package:flutter/material.dart';
 const stockUpdateAuthDialogTextFieldPasswordKey =
     Key('stockUpdateAuthDialogTextFieldPassword');
 
-class StockUpdateAuthDialog extends StatefulWidget {
+class StockUpdateAuthDialog extends StatelessWidget {
   final Function(String password) onConfirm;
 
-  const StockUpdateAuthDialog({Key? key, required this.onConfirm})
-      : super(key: key);
+  StockUpdateAuthDialog({Key? key, required this.onConfirm}) : super(key: key);
 
-  @override
-  State<StockUpdateAuthDialog> createState() => _StockUpdateAuthDialogState();
-}
-
-class _StockUpdateAuthDialogState extends State<StockUpdateAuthDialog> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -46,7 +40,7 @@ class _StockUpdateAuthDialogState extends State<StockUpdateAuthDialog> {
         ),
         TextButton(
           onPressed: () {
-            widget.onConfirm(_passwordController.text);
+            onConfirm(_passwordController.text);
             Navigator.pop(context);
           },
           child: const Text('Confirm'),

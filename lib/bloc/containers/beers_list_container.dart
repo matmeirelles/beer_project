@@ -18,6 +18,6 @@ class BeersListContainer extends BlocContainer {
           beerListCubit.reload(dependencies.beerDao);
           return beerListCubit;
         },
-        child: const BeerList());
+        child: const BeerListView());
   }
 }

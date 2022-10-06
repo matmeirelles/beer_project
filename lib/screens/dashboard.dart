@@ -1,21 +1,27 @@
-import 'package:beers_project/bloc/containers/name_container.dart';
-import 'package:beers_project/components/bloc_container.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'package:beers_project/bloc/containers/name_container.dart';
+import 'package:beers_project/bloc/containers/stock_update_list_container.dart';
+import 'package:beers_project/components/bloc_container.dart';
+
 import '../bloc/containers/beers_list_container.dart';
 import '../bloc/cubits/name_cubit.dart';
+import '../components/dashboard_feature_item.dart';
+import '../components/localization.dart';
 
 class DashboardView extends StatelessWidget {
   const DashboardView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final i18n = DashboardViewI18N(context);
     return Scaffold(
       appBar: AppBar(
         title: BlocBuilder<NameCubit, String>(
             builder: (context, state) => Text(
-                  'Boas vindas $state',
+                  '${i18n.welcome} $state',
                 )),
         backgroundColor: Theme.of(context).primaryColor,
       ),
@@ -38,28 +44,28 @@ class DashboardView extends StatelessWidget {
                   child: Row(
                     children: <Widget>[
                       FeatureItem(
-                          name: 'Mudar nome',
+                          name: i18n.change_name,
                           icon: Icons.person_outlined,
                           onClick: () => _changeName(context)),
                       FeatureItem(
-                        name: 'Cervejas',
+                        name: i18n.beers_text,
                         icon: Icons.sports_bar,
                         onClick: () => _pushToBeersList(context),
                       ),
                       FeatureItem(
-                        name: 'Marcas',
+                        name: i18n.brands_text,
                         icon: Icons.home_filled,
                         onClick: () => _goToPage(
                             context: context, routeName: '/brandList'),
                       ),
                       FeatureItem(
-                        name: 'Atualização de estoque',
+                        name: i18n.stock_update_text,
                         icon: Icons.description,
-                        onClick: () => _goToPage(
-                            context: context, routeName: '/stockUpdateList'),
+                        onClick: () => _pushToStockUpdateList(
+                            context, const StockUpdateListContainer()),
                       ),
                       FeatureItem(
-                        name: 'Transferências',
+                        name: i18n.transfer_text,
                         icon: Icons.description,
                         onClick: () =>
                             _goToPage(context: context, routeName: '/transfer'),
@@ -91,59 +97,8 @@ class DashboardView extends StatelessWidget {
       ),
     ));
   }
-}
 
-class FeatureItem extends StatelessWidget {
-  final String name;
-  final IconData? icon;
-  final Function? onClick;
-
-  const FeatureItem({
-    Key? key,
-    required this.name,
-    required this.icon,
-    required this.onClick,
-  })  : assert(icon != null, 'Icon não pode ser null'),
-        assert(onClick != null),
-        super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        vertical: 8.0,
-        horizontal: 4.0,
-      ),
-      child: Material(
-        color: Theme.of(context).primaryColor,
-        child: InkWell(
-          onTap: () {
-            onClick!();
-          },
-          child: Container(
-            padding: const EdgeInsets.all(8.0),
-            height: 100,
-            width: 150,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Icon(
-                  icon,
-                  color: Colors.white,
-                ),
-                Text(
-                  name,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 16.0,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-    );
+  _pushToStockUpdateList(BuildContext blocContext, BlocContainer container) {
+    push(blocContext, container);
   }
 }
